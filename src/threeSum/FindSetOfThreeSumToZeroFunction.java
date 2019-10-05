@@ -5,50 +5,53 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FindSetOfThreeSumToZeroFunction {
+	// It has to be O(N^2)
 	public List<List<Integer>> threeSum(int[] nums) {
-		// Sort the array first
+		// Sort the array, so we could have two pointer from left and right going toward middle
 		Arrays.sort(nums);
 		
+		// List of ArrayList to store the answer
 		List<List<Integer>> result = new ArrayList<>();
 		
-		for (int i = 0; i + 2 < nums.length; i++) {
-			// Since the array is sorted the next entries sum to 0 could never happen.
-			if (nums[i] > 0){
-				break;
-			}
-			
-			// skip same result
-			if (i > 0 && nums[i] == nums[i - 1]) {
-				continue;
-			}
-			
-			int j = i + 1;
-			int k = nums.length - 1;
-			
-			int target = -nums[i];
-			
-			while (j < k) {
-				if (nums[j] + nums[k] == target) {
-					
-					result.add(Arrays.asList(nums[i], nums[j], nums[k]));
-					
-					j++;
-					
-					k--;
-					while (j < k && nums[j] == nums[j - 1]){
-						j++; // skip same result
-					}
-					while (j < k && nums[k] == nums[k + 1])
-					{
-						k--; // skip same result
-					}
-				} else if (nums[j] + nums[k] > target) {
-					k--;
-				} else {
-					j++;
+		// Nums.length - 2 so it won't go over bound, we are searching for 2 element to add up to current element
+		for(int i = 0; i < nums.length - 2; i++){
+			// We want to skip duplicates, starting from i = 1, or else out of bound
+			if(i == 0 || (i > 0 && nums[i] != nums[i - 1])){
+				// Since we are not counting the current element in our search
+				int low = i + 1;
+				// Most right pointer
+				int high = nums.length - 1;
+				
+				// This is the element we are trying to find in order to get sum of 0
+				int sum = 0 - nums[i];
+				
+				while(low < high){
+					// Since our target is the sum, 2 number that add up to sum in order to get zero
+					if(nums[low] + nums[high] == sum){
+						// A special method to add in a list
+						result.add(Arrays.asList(nums[i], nums[low], nums[high]));
+						
+						// We want to skip duplicates if they are the same on the left
+						while(low < high && nums[low] == nums[low + 1]){
+							low++;
+						}
+						// We want to skip duplicates if they are the same on the right
+						while(low < high && nums[high] == nums[high - 1]){
+							high--;
+						}
+						// update both pointer to go towards middle
+						low++;
+						high--;
+					} else if (nums[low] + nums[high] > sum){ // if the sum is smaller than right pointer add up together
+						// Update the right pointer, since the right most is the biggest
+						high--;
+					} else { // That means the sum is bigger than the left pointer
+						low ++;
+					}			
 				}
 			}
 		}
+		
 		return result;
 	}
 }
