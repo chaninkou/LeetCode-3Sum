@@ -13,16 +13,17 @@ public class FindSetOfThreeSumToZeroFunction {
 		// List of ArrayList to store the answer
 		List<List<Integer>> result = new ArrayList<>();
 		
-		// Nums.length - 2 so it won't go over bound, we are searching for 2 element to add up to current element
+		// Nums.length - 2 so it won't go over bound, we are searching for 2 element after current element to add up to current element
 		for(int i = 0; i < nums.length - 2; i++){
 			// We want to skip duplicates, starting from i = 1, or else out of bound
 			if(i == 0 || (i > 0 && nums[i] != nums[i - 1])){
 				// Since we are not counting the current element in our search
 				int low = i + 1;
+				
 				// Most right pointer
 				int high = nums.length - 1;
 				
-				// This is the element we are trying to find in order to get sum of 0
+				// This is the element we are trying to find in order to get sum of 0, since -4 + 4 = 0
 				int sum = 0 - nums[i];
 				
 				while(low < high){
@@ -32,14 +33,19 @@ public class FindSetOfThreeSumToZeroFunction {
 						result.add(Arrays.asList(nums[i], nums[low], nums[high]));
 						
 						// We want to skip duplicates if they are the same on the left
+						// Since we don't care if they equal to each other again
 						while(low < high && nums[low] == nums[low + 1]){
 							low++;
 						}
+						
 						// We want to skip duplicates if they are the same on the right
+						// Since we don't care if they equal to each other again
+
 						while(low < high && nums[high] == nums[high - 1]){
 							high--;
 						}
-						// update both pointer to go towards middle
+						
+						// update both pointer to go towards middle!!!!!
 						low++;
 						high--;
 					} else if (nums[low] + nums[high] > sum){ // if the sum is smaller than right pointer add up together
