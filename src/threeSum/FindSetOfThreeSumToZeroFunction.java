@@ -7,11 +7,15 @@ import java.util.List;
 public class FindSetOfThreeSumToZeroFunction {
 	// It has to be O(N^2)
 	public List<List<Integer>> threeSum(int[] nums) {
-		// Sort the array, so we could have two pointer from left and right going toward middle
-		Arrays.sort(nums);
-		
 		// List of ArrayList to store the answer
 		List<List<Integer>> result = new ArrayList<>();
+		
+		if(nums.length == 0 || nums == null){
+			return result;
+		}
+		
+		// Sort the array, so we could have two pointer from left and right going toward middle
+		Arrays.sort(nums);
 		
 		// Nums.length - 2 so it won't go over bound, we are searching for 2 element after current element to add up to current element
 		for(int i = 0; i < nums.length - 2; i++){
@@ -51,7 +55,7 @@ public class FindSetOfThreeSumToZeroFunction {
 					} else if (nums[low] + nums[high] > sum){ // if the sum is smaller than right pointer add up together
 						// Update the right pointer, since the right most is the biggest
 						high--;
-					} else { // That means the sum is bigger than the left pointer
+					} else { // That means the sum is bigger than the two pointers combined
 						low ++;
 					}			
 				}
