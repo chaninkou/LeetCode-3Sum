@@ -33,7 +33,7 @@ public class FindSetOfThreeSumToZeroFunction {
 				while(low < high){
 					// Since our target is the sum, 2 number that add up to sum in order to get zero
 					if(nums[low] + nums[high] == sum){
-						// A special method to add in a list
+						// Arrays.asList is a special method to add in a list
 						result.add(Arrays.asList(nums[i], nums[low], nums[high]));
 						
 						// We want to skip duplicates if they are the same on the left
@@ -44,14 +44,13 @@ public class FindSetOfThreeSumToZeroFunction {
 						
 						// We want to skip duplicates if they are the same on the right
 						// Since we don't care if they equal to each other again
-
 						while(low < high && nums[high] == nums[high - 1]){
 							high--;
 						}
 						
 						// update both pointer to go towards middle!!!!!
 						low++;
-						high--;
+						high--; 
 					} else if (nums[low] + nums[high] > sum){ // if the sum is smaller than right pointer add up together
 						// Update the right pointer, since the right most is the biggest
 						high--;
