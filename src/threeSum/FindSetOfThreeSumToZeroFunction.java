@@ -21,7 +21,6 @@ public class FindSetOfThreeSumToZeroFunction {
 		for(int i = 0; i < nums.length - 2; i++){
 			// We want to skip duplicates, starting from i = 1, or else out of bound
 			if(i == 0 || (i > 0 && nums[i] != nums[i - 1])){
-				// Since we are not counting the current element in our search
 				int low = i + 1;
 				
 				// Most right pointer
