@@ -15,6 +15,7 @@ public class FindSetOfThreeSumToZeroFunction {
 		}
 		
 		// Sort the array, so we could have two pointer from left and right going toward middle
+		// O(nlogn) right away
 		Arrays.sort(nums);
 		
 		// Nums.length - 2 so it won't go over bound, we are searching for 2 element after current element to add up to current element
@@ -23,14 +24,13 @@ public class FindSetOfThreeSumToZeroFunction {
 			if(i == 0 || (i > 0 && nums[i] != nums[i - 1])){
 				int low = i + 1;
 				
-				// Most right pointer
 				int high = nums.length - 1;
 				
-				// This is the element we are trying to find in order to get sum of 0, since -4 + 4 = 0
+				// This is the target we are trying to find in order to get sum of 0, since -4 + 4 = 0
 				int sum = 0 - nums[i];
 				
 				while(low < high){
-					// Since our target is the sum, 2 number that add up to sum in order to get zero
+					// Since our target is the sum, 2 elements that add up to sum in order to get zero
 					if(nums[low] + nums[high] == sum){
 						// Arrays.asList is a special method to add in a list
 						result.add(Arrays.asList(nums[i], nums[low], nums[high]));
