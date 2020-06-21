@@ -35,25 +35,33 @@ public class FindSetOfThreeSumToZeroFunction {
 						// Arrays.asList is a special method to add in a list
 						result.add(Arrays.asList(nums[i], nums[low], nums[high]));
 						
-						// We want to skip duplicates if they are the same on the left
-						// Since we don't care if they equal to each other again
+						// Skip duplicates
 						while(low < high && nums[low] == nums[low + 1]){
 							low++;
 						}
 						
-						// We want to skip duplicates if they are the same on the right
-						// Since we don't care if they equal to each other again
+						// Skip duplicates
 						while(low < high && nums[high] == nums[high - 1]){
 							high--;
 						}
 						
-						// update both pointer to go towards middle!!!!!
+						// update both pointers
 						low++;
 						high--; 
-					} else if (nums[low] + nums[high] > sum){ // if the sum is smaller than right pointer add up together
+					} else if (nums[low] + nums[high] > sum){ // if the sum < right side
+						// Skip duplicates
+                        while(low < high && nums[high] == nums[high - 1]){
+                            high--;
+                        }
+                        
 						// Update the right pointer, since the right most is the biggest
 						high--;
-					} else { // That means the sum is bigger than the two pointers combined
+					} else { // sum > right side
+						// Skip duplicates
+						while(low < high && nums[low] == nums[low + 1]){
+							low++;
+						}
+						
 						low ++;
 					}			
 				}
