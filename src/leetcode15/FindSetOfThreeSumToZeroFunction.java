@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FindSetOfThreeSumToZeroFunction {
-	// It has to be O(N^2)
+	// O(N^2)
 	public List<List<Integer>> threeSum(int[] nums) {
 		// List of ArrayList to store the answer
 		List<List<Integer>> result = new ArrayList<>();
